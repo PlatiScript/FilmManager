@@ -1,0 +1,8 @@
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\Client.FilmsManager.csprojAssemblyReference.cache
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\Views\StaticMainWindow.g.cs
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\Views\ViewCollection.g.cs
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\Views\ViewSearch.g.cs
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\FilmsManager.Client_MarkupCompile.cache
+C:\Users\simon\Desktop\FilmsManager\CoursWPF.FirstApp\obj\Debug\net5.0-windows\FilmsManager.Client_MarkupCompile.lref

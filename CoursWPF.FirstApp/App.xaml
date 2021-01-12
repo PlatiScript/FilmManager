@@ -1,0 +1,30 @@
+﻿<Application x:Class="CoursWPF.FirstApp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:CoursWPF.FirstApp"
+             xmlns:MVVMconverters="clr-namespace:CoursWPF.MVVM.Converters;assembly=CoursWPF.MVVM">
+         <!--StartupUri="Views/MainWindow.xaml"-->
+
+  <Application.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+
+        <ResourceDictionary>
+          
+          <!--On créé une instance partagée d'un converter qui sera accessible comme ressource statique-->
+          <MVVMconverters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
+          
+        </ResourceDictionary>
+
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+        <!-- Theme setting -->
+        
+        <ResourceDictionary Source="Styles.xaml"/>
+        <ResourceDictionary Source="Templates.xaml"/>
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+
+
+  </Application.Resources>
+</Application>

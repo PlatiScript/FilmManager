@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CoursWPF.FirstApp"
+                    xmlns:converters="clr-namespace:CoursWPF.FirstApp.Converters"
+                    xmlns:views="clr-namespace:CoursWPF.FirstApp.Views"
+                    xmlns:vm="clr-namespace:CoursWPF.FirstApp.ViewModels.Abstracts"
+                    xmlns:models="clr-namespace:CoursWPF.FirstApp.Models">
+
+    <DataTemplate x:Key="MovieFavoriteTemplate" DataType="{x:Type models:MovieFavorite}">
+        <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="1"
+                Command="{Binding DataContext.DeleteItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" 
+                CommandParameter="{Binding }"
+                Content="X"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Movie.Title}"/>
+        </Grid>
+  </DataTemplate>
+
+
+
+    <DataTemplate x:Key="ViewModelCollectionTemplate" DataType="{x:Type vm:IViewModelCollection}">
+        <views:ViewCollection/>
+  </DataTemplate>
+   
+    <DataTemplate x:Key="ViewModelSearchTemplate" DataType="{x:Type vm:IViewModelSearch}">
+        <views:ViewSearch/>
+    </DataTemplate>
+
+
+</ResourceDictionary>
