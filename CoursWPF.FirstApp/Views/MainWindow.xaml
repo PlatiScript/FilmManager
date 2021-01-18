@@ -8,8 +8,9 @@
         xmlns:views="clr-namespace:CoursWPF.FirstApp.Views"
         xmlns:vm="clr-namespace:CoursWPF.FirstApp.ViewModels.Abstracts"
         mc:Ignorable="d"
-        Title="Film Manager" Height="450" Width="800"
+        Title="Film Manager" Height="700" Width="1200"
         FontSize="20"
+        ResizeMode="NoResize"
         DataContext="{local:ProvideService ServiceType={x:Type vm:IViewModelMain}}">
 
   <Grid>
@@ -27,8 +28,14 @@
     </Menu>
 
     <TabControl Grid.Row="1">
-            <TabItem Header="Ma Collection" DataContext="{Binding ViewModelCollection}">
-        <views:ViewCollection/>
+            <TabItem  DataContext="{Binding ViewModelCollection}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        
+                        <TextBlock Text="Ma Collection" FontSize="25"/>
+                    </StackPanel>
+                </TabItem.Header>
+            <views:ViewCollection/>
       </TabItem>
 
             <TabItem Header="Recherche" DataContext="{Binding ViewModelSearch}">

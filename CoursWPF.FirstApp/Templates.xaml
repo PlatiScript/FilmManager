@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:CoursWPF.FirstApp"
-                    xmlns:converters="clr-namespace:CoursWPF.FirstApp.Converters"
                     xmlns:views="clr-namespace:CoursWPF.FirstApp.Views"
+                    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
                     xmlns:vm="clr-namespace:CoursWPF.FirstApp.ViewModels.Abstracts"
                     xmlns:models="clr-namespace:CoursWPF.FirstApp.Models">
 
@@ -10,20 +10,57 @@
         <Grid>
         <Grid.ColumnDefinitions>
           <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="30"/>
+          <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
+              
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Movie.Title}"/>
             <Button Grid.Column="1"
                 Command="{Binding DataContext.DeleteItem, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}" 
-                CommandParameter="{Binding }"
-                Content="X"/>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding Movie.Title}"/>
+                CommandParameter="{Binding }">
+                <StackPanel>
+                    <iconPacks:PackIconMaterial Kind="Delete" />
+                </StackPanel>
+            </Button>
+
         </Grid>
   </DataTemplate>
+    <DataTemplate x:Key="TagTemplate" DataType="{x:Type models:Tag}">
+        <Border Margin="5" 
+                    CornerRadius="10"
+                   
+                    Background="Black"
+                    HorizontalAlignment="Stretch"
+                    Width="130" Height="40">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
+         
+       
+                <iconPacks:PackIconFontAwesome Grid.Row="1" Grid.Column="0" Kind="TagSolid" Margin="5 12 0 0"/>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="5 5 5 5" Text="{Binding Name}" HorizontalAlignment="Right" FontSize="20" TextTrimming="CharacterEllipsis"/>
+
+
+                <Button Grid.Column="2" BorderThickness="0" Margin="0 3 4 0" Width="25" Height="25"
+              
+                CommandParameter="{Binding }"
+                >
+                    <iconPacks:PackIconMaterial Kind="Delete" />
+                </Button>
+            </Grid>
+        </Border>
+    </DataTemplate>
 
 
     <DataTemplate x:Key="ViewModelCollectionTemplate" DataType="{x:Type vm:IViewModelCollection}">

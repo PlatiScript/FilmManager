@@ -34,6 +34,10 @@ namespace CoursWPF.FirstApp.ViewModels
         /// </summary>
         public event PropertyChangedEventHandler PropertyChangedFilter;
 
+        /// <summary>
+        ///     Fonction pour ajouter un tag
+        /// </summary
+        private RelayCommand _AddTag;
 
         #endregion
 
@@ -48,14 +52,23 @@ namespace CoursWPF.FirstApp.ViewModels
             this.ItemsSource = App.ServiceProvider.GetService<IDataStore>().Collection;
 
             moviesCollection = new CollectionViewSource();
-           moviesCollection.Source = this.ItemsSource;
-           moviesCollection.Filter += usersCollection_Filter; ;
+            moviesCollection.Source = this.ItemsSource;
+            moviesCollection.Filter += usersCollection_Filter;
+
+            this._AddTag = new RelayCommand(this.ExecuteAddTag);
+
 
 
         }
         #endregion
 
         #region Properties
+
+        /// <summary>
+        ///     Obtient la fonction d'ajout de tag
+        /// </summary
+        public RelayCommand AddTag => this._AddTag;
+
 
         /// <summary>
         ///     Obtient ou définit la collection des films favoris
@@ -125,6 +138,15 @@ namespace CoursWPF.FirstApp.ViewModels
                 this.PropertyChangedFilter(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        /// <summary>
+        ///     Execute la fonction d'ajout de tag
+        /// </summary>
+        protected virtual void ExecuteAddTag(object param)
+        {
+            this.SelectedItem.Tags.Add(new Tag(param.ToString()));
+        }
+
         #endregion
     }
 }

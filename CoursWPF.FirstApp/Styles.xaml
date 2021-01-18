@@ -35,7 +35,7 @@
 
   <Style TargetType="Button" BasedOn="{StaticResource MahApps.Styles.Button}">
     <Style.Setters>
-      <Setter Property="Margin" Value="2"/>
+      <Setter Property="Margin" Value="10 0 0 0"/>
     </Style.Setters>
   </Style>
 
@@ -43,7 +43,8 @@
     <Style.Setters>
       <Setter Property="HorizontalAlignment"        Value="Stretch"/>
       <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-    </Style.Setters>
+   
+        </Style.Setters>
   </Style>
 
 </ResourceDictionary>

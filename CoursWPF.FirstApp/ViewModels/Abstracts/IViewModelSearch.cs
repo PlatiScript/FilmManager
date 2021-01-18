@@ -11,7 +11,7 @@ namespace CoursWPF.FirstApp.ViewModels.Abstracts
     /// <summary>
     ///     Interface d'un ViewModel pour gérer une liste de <see cref="Movie"/>.
     /// </summary>
-    public interface IViewModelSearch : IViewModelList<Movie>
+    public interface IViewModelSearch
     {
     }
 }

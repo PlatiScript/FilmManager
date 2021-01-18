@@ -4,11 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoursWPF.FirstApp"   
-                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
-             
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -24,41 +23,72 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <TextBox  x:Name="inputSearch" Margin="5" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            <StackPanel>
+                <TextBlock Margin="15" FontSize="25" TextAlignment="Center"><iconPacks:PackIconMaterial Kind="MovieSearch" Width="20" Height="20" /> Recherchez dans votre collection :</TextBlock>
+                <TextBox  x:Name="inputSearch" Margin="0 0 0 40"  Width="400" Height="40" FontSize="20" Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
+            </StackPanel>
+    
             <ListBox  Grid.Row="1"
-                x:Name="ListBoxItems" 
                 ItemsSource="{Binding SourceCollection}"
                 SelectedItem="{Binding SelectedItem}"
                 ItemTemplate="{StaticResource MovieFavoriteTemplate}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel IsItemsHost="True"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
 
             </ListBox>
 
         </Grid>
+        <StackPanel Margin="0 -70 0 0" Grid.Column="1" Background="White">
 
-        <StackPanel Grid.Column="1" Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
-            <Grid>
-                <iconPacks:PackIconMaterial Kind="EmoticonCool"
-                                 VerticalAlignment="Center"
-                                 HorizontalAlignment="Center" />
-            </Grid>
-            <TextBlock>Ma note :</TextBlock>
-            <TextBox Text="{Binding SelectedItem.Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock>Mes tags :</TextBlock>
-            <TextBox Text="{Binding SelectedItem.Tags, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Grid.Column="1" Margin="0 100 0 0" Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Margin="0 0 0 70" FontSize="40"  TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Black" Text="{Binding SelectedItem.Movie.Title}"></TextBlock>
 
+                <TextBlock Margin="0 0 0 10" FontSize="24"  HorizontalAlignment="Center" Foreground="Black"><iconPacks:PackIconFontAwesome Kind="SortAmountUpSolid" /> Ma note :</TextBlock>
+            <TextBox Width="100" Height="40" FontSize="20" Text="{Binding SelectedItem.Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock Margin="0 50 0 10" FontSize="24"  Foreground="Black" HorizontalAlignment="Center"><iconPacks:PackIconFontAwesome Kind="TagsSolid" /> Mes tags :</TextBlock>
 
-            <CheckBox Content="Vu / Pas vu" 
+                <ListBox  Grid.Row="1"
+                Grid.ColumnSpan="5"
+                x:Name="ListBoxItems" 
+                          Background="Transparent"
+                ItemsSource="{Binding SelectedItem.Tags, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ItemTemplate="{StaticResource TagTemplate}"
+                SelectedItem="null"
+                >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Focusable" Value="False"/>
+                            <Setter Property="IsHitTestVisible" Value="False" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center"/>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                </ListBox>
+                <Grid Width="300" HorizontalAlignment="Center" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" FontSize="20" x:Name="inputTag" />
+                    <Button  Grid.Column="1"  Command="{Binding AddTag}" CommandParameter="{Binding Text, ElementName=inputTag}">
+                        <TextBlock FontSize="20">
+                           <iconPacks:PackIconFontAwesome Kind="PlusSolid" /> Ajouter
+                        </TextBlock>
+                    </Button>
+                </Grid>
+
+                <TextBlock Margin="0 50 0 10" FontSize="24"  Foreground="Black" HorizontalAlignment="Center"><iconPacks:PackIconFontAwesome Kind="EyeRegular" /> Vu / Pas vu</TextBlock>
+                <CheckBox HorizontalAlignment="Center"  Margin="0 0 0 10"
                 IsChecked="{Binding SelectedItem.Seen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                />
 
+            </StackPanel>
         </StackPanel>
 
     </Grid>

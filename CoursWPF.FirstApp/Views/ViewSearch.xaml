@@ -4,44 +4,94 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CoursWPF.FirstApp.Views"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30*"/>
-            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <TextBlock Margin="15" FontSize="15" TextAlignment="Center">Recherchez votre film :</TextBlock>
-            <TextBox  x:Name="inputSearch" Margin="5" Text="Avengers"></TextBox>
-            <Button Margin="5" Command="{Binding Search}" CommandParameter="{Binding Text, ElementName=inputSearch}" >Rechercher</Button>
+            <TextBlock Margin="15" FontSize="25" TextAlignment="Center"><iconPacks:PackIconMaterial Kind="MovieSearch" Width="20" Height="20" /> Recherchez votre film :</TextBlock>
+            <TextBox  x:Name="inputSearch" Margin="5" Text="Avengers" Width="400" Height="40" FontSize="20"></TextBox>
+            <Button Margin="5" Width="400" Height="40" FontSize="20" Command="{Binding Search}" CommandParameter="{Binding Text, ElementName=inputSearch}" >
+
+                <StackPanel>
+                    <TextBlock><iconPacks:PackIconMaterial Kind="SearchWeb" /> Rechercher</TextBlock>
+                </StackPanel>
+            </Button>
 
             <DataGrid
                 ItemsSource="{Binding ItemsSource}"
                 SelectedItem="{Binding SelectedItem}"
-                IsReadOnly="True">
+                Margin="0 30 0 0"
+                 Visibility="{Binding CurrentSearch, Converter={StaticResource ObjectToVisibilityConverter}}"
+                IsReadOnly="True" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="70*" Header="Titre du film" Binding="{Binding Title}" />
+                    <DataGridTextColumn Width="12*" Header="Type" Binding="{Binding Type}"/>
+                    <DataGridTextColumn Width="18*" Header="Année" Binding="{Binding Year}"/>
+                </DataGrid.Columns>
             </DataGrid>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="0 20 0 0" HorizontalAlignment="Center" Visibility="{Binding CurrentSearch, Converter={StaticResource ObjectToVisibilityConverter}}">
+               
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0" Margin="10 0 10 0" Command="{Binding PreviousPage}" CommandParameter="{Binding Text, ElementName=inputSearch}">
+                        <StackPanel>
+                            <iconPacks:PackIconFontAwesome Kind="AngleLeftSolid" />
+                        </StackPanel>
+                    </Button>
+                    <TextBlock Grid.Column="1">
+                          <Run Text="{Binding CurrentPage}"/>
+                          <Run Text="/"/>
+                          <Run Text="{Binding CurrentPagesNumber}"/>
+                    </TextBlock>
+
+                    <Button Grid.Column="2" Command="{Binding NextPage}" CommandParameter="{Binding Text, ElementName=inputSearch}">
+                        <StackPanel>
+                            <iconPacks:PackIconFontAwesome Kind="AngleRightSolid" />
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+                  
+            </StackPanel>
         </StackPanel>
-        <StackPanel Grid.Column="1" Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
-            <TextBlock Margin="15" FontSize="25" FontWeight="Bold" TextAlignment="Center" Text="{Binding SelectedItem.Title}"></TextBlock>
-            <Grid>
+       
+        <StackPanel Margin="0 -70 0 0" Grid.Column="1" Background="White">
+            <StackPanel  Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
+                <TextBlock Margin="15 100 15 40" Foreground="Black" FontSize="25" FontWeight="Bold" TextAlignment="Center" Text="{Binding SelectedItem.Title}"></TextBlock>
+                <Grid>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="33*"/>
-                    <ColumnDefinition Width="20*"/>
-                    <ColumnDefinition Width="33*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Margin="15" Grid.Column="0" FontSize="20" FontWeight="Bold" TextAlignment="Center">Année :</TextBlock>
-                <TextBlock Margin="50" Grid.Column="0" FontSize="15"  TextAlignment="Center" Text="{Binding SelectedItem.Year}"></TextBlock>
-                <Image Grid.Column="1" Source="{Binding SelectedItem.Poster}" Stretch="UniformToFill"/>
-                <TextBlock Margin="15" Grid.Column="2" FontSize="20" FontWeight="Bold" TextAlignment="Center">Type :</TextBlock>
-                <TextBlock Margin="50" Grid.Column="2" FontSize="15"  TextAlignment="Center" Text="{Binding SelectedItem.Type}"></TextBlock>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="35*"/>
+                        <ColumnDefinition Width="33*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="15" Grid.Column="0" Foreground="Black" FontSize="24" FontWeight="Bold" TextAlignment="Center"><iconPacks:PackIconFontAwesome Kind="HistorySolid" /> Année :</TextBlock>
+                    <TextBlock Margin="70" Grid.Column="0" Foreground="Black" FontSize="19"  TextAlignment="Center" Text="{Binding SelectedItem.Year}"></TextBlock>
+                    <Image Grid.Column="1" Source="{Binding SelectedItem.Poster}" Stretch="UniformToFill"/>
+                    <TextBlock Margin="15" Grid.Column="2" Foreground="Black" FontSize="24" FontWeight="Bold" TextAlignment="Center"><iconPacks:PackIconFontAwesome Kind="FilmSolid" /> Type :</TextBlock>
+                    <TextBlock Margin="70" Grid.Column="2" Foreground="Black" FontSize="19"  TextAlignment="Center" Text="{Binding SelectedItem.Type}"></TextBlock>
 
-            </Grid>
-            <Button Width="200" Margin="30" Command="{Binding AddFavorite}" >Ajouter à ma collection</Button>
-
+                </Grid>
+                <Button Width="300" Margin="30" FontSize="20" Command="{Binding AddFavorite}">
+                    <TextBlock><iconPacks:PackIconFontAwesome Kind="PlusCircleSolid" /> Ajouter à ma collection</TextBlock>
+                </Button>
+            </StackPanel>
+            
+          
         </StackPanel>
 
     </Grid>

@@ -11,7 +11,7 @@ namespace FilmsManager.Models
     /// <summary>
     ///     Réprésente le résultat de la recherche sur l'API Imbd
     /// </summary>
-    class Search : ObservableObject
+    public class Search : ObservableObject
     {
         #region Fields
 
