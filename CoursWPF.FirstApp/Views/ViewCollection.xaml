@@ -42,11 +42,11 @@
         <StackPanel Margin="0 -70 0 0" Grid.Column="1" Background="White">
 
             <StackPanel Grid.Column="1" Margin="0 100 0 0" Visibility="{Binding SelectedItem, Converter={StaticResource ObjectToVisibilityConverter}}">
-                <TextBlock Margin="0 0 0 70" FontSize="40"  TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Black" Text="{Binding SelectedItem.Movie.Title}"></TextBlock>
+                <TextBlock Margin="0 0 0 40" FontSize="40"  TextWrapping="Wrap" HorizontalAlignment="Center" Foreground="Black" Text="{Binding SelectedItem.Movie.Title}"></TextBlock>
 
                 <TextBlock Margin="0 0 0 10" FontSize="24"  HorizontalAlignment="Center" Foreground="Black"><iconPacks:PackIconFontAwesome Kind="SortAmountUpSolid" /> Ma note :</TextBlock>
             <TextBox Width="100" Height="40" FontSize="20" Text="{Binding SelectedItem.Note, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBlock Margin="0 50 0 10" FontSize="24"  Foreground="Black" HorizontalAlignment="Center"><iconPacks:PackIconFontAwesome Kind="TagsSolid" /> Mes tags :</TextBlock>
+                <TextBlock Margin="0 30 0 10" FontSize="24"  Foreground="Black" HorizontalAlignment="Center"><iconPacks:PackIconFontAwesome Kind="TagsSolid" /> Mes tags :</TextBlock>
 
                 <ListBox  Grid.Row="1"
                 Grid.ColumnSpan="5"
@@ -54,15 +54,13 @@
                           Background="Transparent"
                 ItemsSource="{Binding SelectedItem.Tags, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 ItemTemplate="{StaticResource TagTemplate}"
-                SelectedItem="null"
+                SelectedItem="{Binding SelectedTag}"
                 >
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="{x:Type ListBoxItem}">
-                            <Setter Property="Focusable" Value="False"/>
-                            <Setter Property="IsHitTestVisible" Value="False" />
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Background" Value="Transparent"/>
                         </Style>
                     </ListBox.ItemContainerStyle>
-
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <WrapPanel HorizontalAlignment="Center"/>
@@ -70,6 +68,7 @@
                     </ListBox.ItemsPanel>
 
                 </ListBox>
+                <TextBlock Margin="0 50 0 10" FontSize="24"  Foreground="Black" HorizontalAlignment="Center"><iconPacks:PackIconFontAwesome Kind="EyeRegular" /> Ajouter un tag :</TextBlock>
                 <Grid Width="300" HorizontalAlignment="Center" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>

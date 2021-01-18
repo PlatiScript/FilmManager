@@ -35,7 +35,7 @@
                    
                     Background="Black"
                     HorizontalAlignment="Stretch"
-                    Width="130" Height="40">
+                    Width="150" Height="40">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -49,13 +49,12 @@
        
                 <iconPacks:PackIconFontAwesome Grid.Row="1" Grid.Column="0" Kind="TagSolid" Margin="5 12 0 0"/>
 
-                <TextBlock Grid.Row="1" Grid.Column="0" Margin="5 5 5 5" Text="{Binding Name}" HorizontalAlignment="Right" FontSize="20" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="5 8 5 5" Text="{Binding Name}" HorizontalAlignment="Right" FontSize="18" TextTrimming="CharacterEllipsis"/>
 
 
-                <Button Grid.Column="2" BorderThickness="0" Margin="0 3 4 0" Width="25" Height="25"
-              
-                CommandParameter="{Binding }"
-                >
+                <Button Grid.Column="2" Margin="5 5 5 5"
+                Command="{Binding DataContext.RemoveTag, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListBox}}"
+                     CommandParameter="{Binding}">
                     <iconPacks:PackIconMaterial Kind="Delete" />
                 </Button>
             </Grid>

@@ -2,6 +2,7 @@
 using FilmsManager.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace CoursWPF.FirstApp.Models
         /// <summary>
         ///     Les tags donnés pour le film
         /// </summary>
-        private List<Tag> _Tags;
+        private ObservableCollection<Tag> _Tags;
 
         /// <summary>
         ///     La note donnée au film
@@ -60,7 +61,7 @@ namespace CoursWPF.FirstApp.Models
         /// <summary>
         ///     Obtient ou définit les tags du film
         /// </summary>
-        public List<Tag> Tags
+        public ObservableCollection<Tag> Tags
         {
             get => this._Tags;
             set => this.SetProperty(nameof(this._Tags), ref this._Tags, value);
@@ -81,11 +82,7 @@ namespace CoursWPF.FirstApp.Models
         public MovieFavorite(Movie m)
         {
             this.Movie = m;
-            this.Tags = new List<Tag>();
-            this.Tags.Add(new Tag("Film"));
-            this.Tags.Add(new Tag("Action"));
-            this.Tags.Add(new Tag("SF"));
-
+            this.Tags = new ObservableCollection<Tag>();
 
         }
         #endregion

@@ -25,6 +25,11 @@ namespace CoursWPF.FirstApp.ViewModels
         private string filterText;
 
         /// <summary>
+        ///     Valeur du tag selectionné (pour suppression)
+        /// </summary>
+        private Tag _SelectedTag;
+
+        /// <summary>
         ///     CollectionView pour le filtrage
         /// </summary>
         private CollectionViewSource moviesCollection;
@@ -38,6 +43,11 @@ namespace CoursWPF.FirstApp.ViewModels
         ///     Fonction pour ajouter un tag
         /// </summary
         private RelayCommand _AddTag;
+
+        /// <summary>
+        ///     Fonction pour supprimer un tag
+        /// </summary
+        private RelayCommand _RemoveTag;
 
         #endregion
 
@@ -56,9 +66,7 @@ namespace CoursWPF.FirstApp.ViewModels
             moviesCollection.Filter += usersCollection_Filter;
 
             this._AddTag = new RelayCommand(this.ExecuteAddTag);
-
-
-
+            this._RemoveTag = new RelayCommand(this.ExecuteRemoveTag, this.CanExecuteRemoveTag);
         }
         #endregion
 
@@ -68,6 +76,11 @@ namespace CoursWPF.FirstApp.ViewModels
         ///     Obtient la fonction d'ajout de tag
         /// </summary
         public RelayCommand AddTag => this._AddTag;
+
+        /// <summary>
+        ///     Obtient la fonction de suppression de tag
+        /// </summary
+        public RelayCommand RemoveTag => this._RemoveTag;
 
 
         /// <summary>
@@ -96,6 +109,15 @@ namespace CoursWPF.FirstApp.ViewModels
                 this.moviesCollection.View.Refresh();
                 RaisePropertyChanged("FilterText");
             }
+        }
+
+        /// <summary>
+        ///     Obtient ou définit la valeur du tag selectionné
+        /// </summary>
+        public Tag SelectedTag
+        {
+            get => this._SelectedTag;
+            set => this.SetProperty(nameof(this.SelectedItem), ref this._SelectedTag, value);
         }
 
         #endregion
@@ -146,6 +168,18 @@ namespace CoursWPF.FirstApp.ViewModels
         {
             this.SelectedItem.Tags.Add(new Tag(param.ToString()));
         }
+        /// <summary>
+        ///     Execute la fonction de suppression de tag
+        /// </summary>
+        protected virtual void ExecuteRemoveTag(object param)
+        {
+            this.SelectedItem.Tags.Remove((Tag)param);
+        }
+        /// <summary>
+        ///     Verifie la possibilité d'execution de la fonction de suppression de tag
+        /// </summary>
+        protected virtual bool CanExecuteRemoveTag(object param) => this.SelectedItem != null;
+
 
         #endregion
     }

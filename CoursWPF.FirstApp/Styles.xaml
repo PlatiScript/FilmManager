@@ -45,6 +45,7 @@
       <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
    
         </Style.Setters>
+      
   </Style>
 
 </ResourceDictionary>
